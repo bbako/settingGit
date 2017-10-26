@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="BoardDAO" >
+
+
+<select id="readAll" resultType="org.hy.domain.BoardVO" >
+	select * from s_board order by BOARD_DATETIME desc
+</select>
+
+<insert id="create" parameterType="org.hy.domain.BoardVO">
+	insert into s_board(BOARD_TITLE,BOARD_CONTENT,BOARD_WRITER,BOARD_DATETIME,BOARD_VIEWCOUNTER) values(#{board_title},#{board_content},#{board_writer},now(),0)
+</insert>
+
+<select id="readOne" resultType="org.hy.domain.BoardVO">
+	select * from s_board where seq_id=#{one}
+</select>
+
+<update id="update" parameterType="org.hy.domain.BoardVO">
+	UPDATE s_board SET BOARD_TITLE=#{board_title},BOARD_CONTENT=#{board_content},BOARD_WRITER=#{board_writer} where SEQ_ID = #{seq_id}
+</update>
+
+
+</mapper>
